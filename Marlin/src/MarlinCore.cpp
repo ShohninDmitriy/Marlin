@@ -28,7 +28,7 @@
  *  - https://github.com/grbl/grbl
  */
 
-#include "Marlin.h"
+#include "MarlinCore.h"
 
 #include "core/utility.h"
 #include "lcd/ultralcd.h"
@@ -618,7 +618,7 @@ void manage_inactivity(const bool ignore_stepper_queue/*=false*/) {
   #if PIN_EXISTS(FET_SAFETY)
     static millis_t FET_next;
     if (ELAPSED(ms, FET_next)) {
-      FET_next = ms + FET_SAFETY_DELAY;  // 2uS pulse every FET_SAFETY_DELAY mS
+      FET_next = ms + FET_SAFETY_DELAY;  // 2µs pulse every FET_SAFETY_DELAY mS
       OUT_WRITE(FET_SAFETY_PIN, !FET_SAFETY_INVERTED);
       DELAY_US(2);
       WRITE(FET_SAFETY_PIN, FET_SAFETY_INVERTED);
@@ -1128,10 +1128,9 @@ void setup() {
  *  - Call inactivity manager
  */
 void loop() {
+  do {
 
-  for (;;) {
-
-    idle(); // Do an idle first so boot is slightly faster
+    idle();
 
     #if ENABLED(SDSUPPORT)
       card.checkautostart();
@@ -1141,5 +1140,10 @@ void loop() {
     queue.advance();
 
     endstops.event_handler();
-  }
+
+  } while (false        // Return to caller for best compatibility
+    #ifdef __AVR__
+      || true           // Loop forever on slower (AVR) boards
+    #endif
+  );
 }

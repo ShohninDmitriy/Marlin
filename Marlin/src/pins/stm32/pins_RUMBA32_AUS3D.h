@@ -22,32 +22,21 @@
 #pragma once
 
 /**
- * MKS BASE 1.0 – Arduino Mega2560 with RAMPS v1.4 pin assignments
+ * Pin assignments for the MKS RUMBA32
  *
- * Rev B - Override pin definitions for CASE_LIGHT and M3/M4/M5 spindle control
+ * https://aus3d.com.au/rumba32
+ * https://github.com/Aus3D/RUMBA32
+ *
+ * The MKS and Aus3D versions have the same pinout but the MKS version
+ * has some added resistors and LEDs.  The resistors needed for the
+ * TMC2208/9 UART interface are among the additions.  Also added were
+ * connectors and resistors dedicated to the TMC2130 sensorless homing
+ * interface.
  */
 
-#if HOTENDS > 2 || E_STEPPERS > 2
-  #error "MKS BASE 1.0 supports up to 2 hotends / E-steppers. Comment out this line to continue."
-#endif
+#define BOARD_INFO_NAME "Aus3D RUMBA32"
 
-#ifndef BOARD_INFO_NAME
-  #define BOARD_INFO_NAME "MKS BASE 1.0"
-#endif
+#define RUMBA32_V1_0
+//#define I2C_EEPROM
 
-//
-// Heaters / Fans
-//
-// Power outputs EFBF or EFBE
-#define MOSFET_D_PIN              7
-
-#define CASE_LIGHT_PIN            2
-
-//
-// M3/M4/M5 - Spindle/Laser Control
-//
-#define SPINDLE_LASER_PWM_PIN     2   // Hardware PWM
-#define SPINDLE_LASER_ENA_PIN    15   // Pullup!
-#define SPINDLE_DIR_PIN          19
-
-#include "pins_RAMPS.h"
+#include "pins_RUMBA32_common.h"

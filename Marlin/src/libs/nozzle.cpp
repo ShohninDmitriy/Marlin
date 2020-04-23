@@ -42,9 +42,7 @@ Nozzle nozzle;
    * @param strokes number of strokes to execute
    */
   void Nozzle::stroke(const xyz_pos_t &start, const xyz_pos_t &end, const uint8_t &strokes) {
-    #if ENABLED(NOZZLE_CLEAN_GOBACK)
-      const xyz_pos_t oldpos = current_position;
-    #endif
+    TERN_(NOZZLE_CLEAN_GOBACK, const xyz_pos_t oldpos = current_position);
 
     // Move to the starting point
     #if ENABLED(NOZZLE_CLEAN_NO_Z)
@@ -54,14 +52,12 @@ Nozzle nozzle;
     #endif
 
     // Start the stroke pattern
-    for (uint8_t i = 0; i < (strokes >> 1); i++) {
+    LOOP_L_N(i, strokes >> 1) {
       do_blocking_move_to_xy(end);
       do_blocking_move_to_xy(start);
     }
 
-    #if ENABLED(NOZZLE_CLEAN_GOBACK)
-      do_blocking_move_to(oldpos);
-    #endif
+    TERN_(NOZZLE_CLEAN_GOBACK, do_blocking_move_to(oldpos));
   }
 
   /**
@@ -77,9 +73,7 @@ Nozzle nozzle;
     const xy_pos_t diff = end - start;
     if (!diff.x || !diff.y) return;
 
-    #if ENABLED(NOZZLE_CLEAN_GOBACK)
-      const xyz_pos_t back = current_position;
-    #endif
+    TERN_(NOZZLE_CLEAN_GOBACK, const xyz_pos_t back = current_position);
 
     #if ENABLED(NOZZLE_CLEAN_NO_Z)
       do_blocking_move_to_xy(start);
@@ -91,7 +85,7 @@ Nozzle nozzle;
     const bool horiz = ABS(diff.x) >= ABS(diff.y);    // Do a horizontal wipe?
     const float P = (horiz ? diff.x : diff.y) / zigs; // Period of each zig / zag
     const xyz_pos_t *side;
-    for (uint8_t j = 0; j < strokes; j++) {
+    LOOP_L_N(j, strokes) {
       for (int8_t i = 0; i < zigs; i++) {
         side = (i & 1) ? &end : &start;
         if (horiz)
@@ -108,9 +102,7 @@ Nozzle nozzle;
       }
     }
 
-    #if ENABLED(NOZZLE_CLEAN_GOBACK)
-      do_blocking_move_to(back);
-    #endif
+    TERN_(NOZZLE_CLEAN_GOBACK, do_blocking_move_to(back));
   }
 
   /**
@@ -124,18 +116,11 @@ Nozzle nozzle;
   void Nozzle::circle(const xyz_pos_t &start, const xyz_pos_t &middle, const uint8_t &strokes, const float &radius) {
     if (strokes == 0) return;
 
-    #if ENABLED(NOZZLE_CLEAN_GOBACK)
-      const xyz_pos_t back = current_position;
-    #endif
+    TERN_(NOZZLE_CLEAN_GOBACK, const xyz_pos_t back = current_position);
+    TERN(NOZZLE_CLEAN_NO_Z, do_blocking_move_to_xy, do_blocking_move_to)(start);
 
-    #if ENABLED(NOZZLE_CLEAN_NO_Z)
-      do_blocking_move_to_xy(start);
-    #else
-      do_blocking_move_to(start);
-    #endif
-
-    for (uint8_t s = 0; s < strokes; s++)
-      for (uint8_t i = 0; i < NOZZLE_CLEAN_CIRCLE_FN; i++)
+    LOOP_L_N(s, strokes)
+      LOOP_L_N(i, NOZZLE_CLEAN_CIRCLE_FN)
         do_blocking_move_to_xy(
           middle.x + sin((RADIANS(360) / NOZZLE_CLEAN_CIRCLE_FN) * i) * radius,
           middle.y + cos((RADIANS(360) / NOZZLE_CLEAN_CIRCLE_FN) * i) * radius
@@ -144,9 +129,7 @@ Nozzle nozzle;
     // Let's be safe
     do_blocking_move_to_xy(start);
 
-    #if ENABLED(NOZZLE_CLEAN_GOBACK)
-      do_blocking_move_to(back);
-    #endif
+    TERN_(NOZZLE_CLEAN_GOBACK, do_blocking_move_to(back));
   }
 
   /**

@@ -89,7 +89,7 @@
  *   Many thanks to Hans Raaf (@oderwat) for developing the Anet-specific software and supporting the Anet community.
  */
 
-#ifndef __AVR_ATmega1284P__
+#if NOT_TARGET(__AVR_ATmega1284P__)
   #error "Oops! Select 'Sanguino' in 'Tools > Board' and 'ATmega1284P' in 'Tools > Processor.' (For PlatformIO, use 'melzi' or 'melzi_optiboot.')"
 #endif
 
@@ -152,7 +152,7 @@
  *  REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
  */
 
-#if HAS_SPI_LCD
+#if HAS_WIRED_LCD
   #define LCD_SDSS                            28
   #if ENABLED(ADC_KEYPAD)
     #define SERVO0_PIN                        27  // free for BLTouch/3D-Touch

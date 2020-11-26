@@ -416,11 +416,14 @@ inline void process_stream_char(const char c, uint8_t &sis, char (&buff)[MAX_CMD
  * keep sensor readings going and watchdog alive.
  */
 inline bool process_line_done(uint8_t &sis, char (&buff)[MAX_CMD_SIZE], int &ind) {
-  sis = PS_NORMAL;
-  buff[ind] = 0;
-  if (ind) { ind = 0; return false; }
-  thermalManager.manage_heater();
-  return true;
+  sis = PS_NORMAL;                    // "Normal" Serial Input State
+  buff[ind] = '\0';                   // Of course, I'm a Terminator.
+  const bool is_empty = (ind == 0);   // An empty line?
+  if (is_empty)
+    thermalManager.manage_heater();   // Keep sensors satisfied
+  else
+    ind = 0;                          // Start a new line
+  return is_empty;                    // Inform the caller
 }
 
 /**
@@ -535,12 +538,11 @@ void GCodeQueue::get_serial_commands() {
 
         #if DISABLED(EMERGENCY_PARSER)
           // Process critical commands early
-          if (strcmp_P(command, PSTR("M108")) == 0) {
-            wait_for_heatup = false;
-            TERN_(HAS_LCD_MENU, wait_for_user = false);
+          if (command[0] == 'M') switch (command[3]) {
+            case '8': if (command[2] == '0' && command[1] == '1') { wait_for_heatup = false; TERN_(HAS_LCD_MENU, wait_for_user = false); } break;
+            case '2': if (command[2] == '1' && command[1] == '1') kill(M112_KILL_STR, nullptr, true); break;
+            case '0': if (command[1] == '4' && command[2] == '1') quickstop_stepper(); break;
           }
-          if (strcmp_P(command, PSTR("M112")) == 0) kill(M112_KILL_STR, nullptr, true);
-          if (strcmp_P(command, PSTR("M410")) == 0) quickstop_stepper();
         #endif
 
         #if defined(NO_TIMEOUTS) && NO_TIMEOUTS > 0

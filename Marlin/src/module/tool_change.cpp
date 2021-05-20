@@ -113,10 +113,7 @@
 
   void move_extruder_servo(const uint8_t e) {
     planner.synchronize();
-    #if EXTRUDERS & 1
-      if (e < EXTRUDERS - 1)
-    #endif
-    {
+    if ((EXTRUDERS & 1) && e < EXTRUDERS - 1) {
       MOVE_SERVO(_SERVO_NR(e), servo_angles[_SERVO_NR(e)][e & 1]);
       safe_delay(500);
     }
@@ -1184,7 +1181,7 @@ void tool_change(const uint8_t new_tool, bool no_move/*=false*/) {
       sync_plan_position();
 
       #if ENABLED(DELTA)
-        //LOOP_XYZ(i) update_software_endstops(i); // or modify the constrain function
+        //LOOP_LINEAR_AXES(i) update_software_endstops(i); // or modify the constrain function
         const bool safe_to_move = current_position.z < delta_clip_start_height - 1;
       #else
         constexpr bool safe_to_move = true;

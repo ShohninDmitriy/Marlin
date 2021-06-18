@@ -1,9 +1,9 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
- * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
+ * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,172 +16,112 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#pragma once
 
-/**
- * Common pin assignments for all RUMBA32 boards
- */
+ /**
+  * 2017 Victor Perez Marlin for stm32f1 test
+  * 2018 Modified by Pablo Crespo for Morpheus Board (https://github.com/pscrespo/Morpheus-STM32)
+  * 08.2020 Modified by 3dmaniack for fork of Morpheus Board
+  */
 
-#include "env_validate.h"
+//
+// MORPHEUS Board pin assignments
+//
 
-#if HOTENDS > 3 || E_STEPPERS > 3
+/*#ifndef __STM32F1__
+  #error "Oops!  Make sure you have an STM32F1 board selected from the 'Tools -> Boards' menu."
+#endif
+
+#define BOARD_NAME "Bluepill based board"
+*/
+#if NOT_TARGET(STM32F4)
+  #error "Oops! Select an STM32F4 board in 'Tools > Board.'"
+#elif HOTENDS > 3 || E_STEPPERS > 3
   #error "RUMBA32 boards support up to 3 hotends / E-steppers."
 #endif
 
 #define DEFAULT_MACHINE_NAME BOARD_INFO_NAME
-
-// Use soft PWM for fans - PWM is not working properly when paired with STM32 Arduino Core v1.7.0
-// This can be removed when Core version is updated and PWM behaviour is fixed.
-#define FAN_SOFT_PWM
-
-//
-// Configure Timers
-// TIM6 is used for TONE
-// TIM7 is used for SERVO
-// TIMER_SERIAL defaults to TIM7 and must be overridden in the platformio.h file if SERVO will also be used.
-//              This will be difficult to solve from the Arduino IDE, without modifying the RUMBA32 variant
-//              included with the STM32 framework.
-
-#define STEP_TIMER 10
-#define TEMP_TIMER 14
-
 //
 // Limit Switches
 //
-#define X_MIN_PIN                           PB12
-#define X_MAX_PIN                           PB13
-#define Y_MIN_PIN                           PB15
-#define Y_MAX_PIN                           PD8
-#define Z_MIN_PIN                           PD9
-#define Z_MAX_PIN                           PD10
+//#define X_MAX_PIN          PB9
+//#define Y_MAX_PIN          PB3
+//#define Z_MAX_PIN          PA9
+#define X_MIN_PIN		PB9
+#define Y_MIN_PIN		PB3
+#define Z_MIN_PIN		PA9
+
 
 //
 // Steppers
 //
-#define X_STEP_PIN                          PA0
-#define X_DIR_PIN                           PC15
-#define X_ENABLE_PIN                        PC11
-#define X_CS_PIN                            PC14
+// X & Y enable are the same
+#define X_STEP_PIN         PB7
+#define X_DIR_PIN          PB6
+#define X_ENABLE_PIN       PB8
 
-#define Y_STEP_PIN                          PE5
-#define Y_DIR_PIN                           PE6
-#define Y_ENABLE_PIN                        PE3
-#define Y_CS_PIN                            PE4
+#define Y_STEP_PIN         PB5
+#define Y_DIR_PIN          PB4
+#define Y_ENABLE_PIN       PB8
 
-#define Z_STEP_PIN                          PE1
-#define Z_DIR_PIN                           PE2
-#define Z_ENABLE_PIN                        PB7
-#define Z_CS_PIN                            PE0
+#define Z_STEP_PIN         PA15
+#define Z_DIR_PIN          PA10
+#define Z_ENABLE_PIN       PB8
 
-#define E0_STEP_PIN                         PB5
-#define E0_DIR_PIN                          PB6
-#define E0_ENABLE_PIN                       PC12
-#define E0_CS_PIN                           PC13
-
-#define E1_STEP_PIN                         PD6
-#define E1_DIR_PIN                          PD7
-#define E1_ENABLE_PIN                       PD4
-#define E1_CS_PIN                           PD5
-
-#define E2_STEP_PIN                         PD2
-#define E2_DIR_PIN                          PD3
-#define E2_ENABLE_PIN                       PD0
-#define E2_CS_PIN                           PD1
-
-#if ENABLED(TMC_USE_SW_SPI)
-  #ifndef TMC_SW_MOSI
-    #define TMC_SW_MOSI                     PA7
-  #endif
-  #ifndef TMC_SW_MISO
-    #define TMC_SW_MISO                     PA6
-  #endif
-  #ifndef TMC_SW_SCK
-    #define TMC_SW_SCK                      PA5
-  #endif
-#endif
+#define E0_STEP_PIN        PA8
+#define E0_DIR_PIN         PB15
+#define E0_ENABLE_PIN      PB8
 
 //
 // Temperature Sensors
 //
-#define TEMP_0_PIN                          PC4
-#define TEMP_1_PIN                          PC3
-#define TEMP_2_PIN                          PC2
-#define TEMP_3_PIN                          PC1
-#define TEMP_BED_PIN                        PC0
+#define TEMP_0_PIN         PB0   // Analog Input (HOTEND thermistor)
+#define TEMP_BED_PIN       PA3  // Analog Input (BED thermistor)
 
 //
 // Heaters / Fans
 //
-#define HEATER_0_PIN                        PC6
-#define HEATER_1_PIN                        PC7
-#define HEATER_2_PIN                        PC8
-#define HEATER_BED_PIN                      PA1
+#define HEATER_0_PIN       PA1   // HOTEND MOSFET
+#define HEATER_BED_PIN     PB10  // BED MOSFET
 
-#define FAN_PIN                             PC9
-#define FAN1_PIN                            PA8
+#define FAN_PIN            PA0   // FAN1 header on board - PRINT FAN
 
+
+//Encoder
+#define BTN_EN1           PC15
+#define BTN_EN2           PC14
+#define BTN_ENC           PC13
+
+// SDCard
+#define SDSS               PA4
+#define SD_DETECT_PIN     -1
+#define KILL_PIN          -1
+
+//LCD REPRAP_DISCOUNT_SMART_CONTROLLER
 //
-// SPI
+ #define LCD_PINS_RS         PB12
+ #define LCD_PINS_ENABLE     PB13
+ #define LCD_PINS_D4         PB14
+ #define LCD_PINS_D5         PA2
+ #define LCD_PINS_D6         PB1//
+ #define LCD_PINS_D7         PB2///<- Ты вонючий алкашь, что блядь это такое, сука, я тебя спрашиваю!
+
+//MKS_MINI_12864
 //
-#define SD_SCK_PIN                          PA5
-#define SD_MISO_PIN                         PA6
-#define SD_MOSI_PIN                         PA7
+ //#define DOGLCD_CS         PA3
+ //#define DOGLCD_A0         PB10
 
-//
-// Misc. Functions
-//
-#define LED_PIN                             PB14
-#define BTN_PIN                             PC10
-#define PS_ON_PIN                           PE11
-#define KILL_PIN                            PC5
+ // GLCD features
+ //
+ //#define LCD_CONTRAST   190
 
-#define SDSS                                PA2
-#define SD_DETECT_PIN                       PB0
-#define BEEPER_PIN                          PE8
+ // Uncomment screen orientation
+ //
+ //#define LCD_SCREEN_ROT_90
+ //#define LCD_SCREEN_ROT_180
+ //#define LCD_SCREEN_ROT_270
 
-//
-// LCD / Controller
-//
-#if HAS_WIRED_LCD
-
-  #define BTN_EN1                           PB2
-  #define BTN_EN2                           PB1
-  #define BTN_ENC                           PE7
-
-  #define LCD_PINS_RS                       PE10
-  #define LCD_PINS_ENABLE                   PE9
-  #define LCD_PINS_D4                       PE12
-
-  #if ENABLED(MKS_MINI_12864)
-    #define DOGLCD_CS                       PE13
-    #define DOGLCD_A0                       PE14
-  #endif
-
-  #if IS_ULTIPANEL
-    #define LCD_PINS_D5                     PE13
-    #define LCD_PINS_D6                     PE14
-    #define LCD_PINS_D7                     PE15
-
-    #if ENABLED(REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
-      #define BTN_ENC_EN             LCD_PINS_D7  // Detect the presence of the encoder
-    #endif
-
-  #endif
-
-  // Alter timing for graphical display
-  #if HAS_MARLINUI_U8GLIB
-    #ifndef BOARD_ST7920_DELAY_1
-      #define BOARD_ST7920_DELAY_1 DELAY_NS(96)
-    #endif
-    #ifndef BOARD_ST7920_DELAY_2
-      #define BOARD_ST7920_DELAY_2 DELAY_NS(48)
-    #endif
-    #ifndef BOARD_ST7920_DELAY_3
-      #define BOARD_ST7920_DELAY_3 DELAY_NS(640)
-    #endif
-  #endif
-
-#endif
+//#define DISABLE_JTAG
+#define FAN_SOFT_PWM

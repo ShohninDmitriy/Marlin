@@ -58,8 +58,8 @@
 // Steppers
 //
 // X & Y enable are the same
-#define X_STEP_PIN         PB7
-#define X_DIR_PIN          PB6
+#define X_STEP_PIN         PB1
+#define X_DIR_PIN          PB2
 #define X_ENABLE_PIN       PB8
 
 #define Y_STEP_PIN         PB5
@@ -105,8 +105,8 @@
  #define LCD_PINS_ENABLE     PB13
  #define LCD_PINS_D4         PB14
  #define LCD_PINS_D5         PA2
- #define LCD_PINS_D6         PB1//
- #define LCD_PINS_D7         PB2///<- Ты вонючий алкашь, что блядь это такое, сука, я тебя спрашиваю!
+ //#define LCD_PINS_D6         PB1//
+ //#define LCD_PINS_D7         PB2///<- Ты вонючий алкашь, что блядь это такое, сука, я тебя спрашиваю!
 
 //MKS_MINI_12864
 //

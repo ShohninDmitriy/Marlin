@@ -42,12 +42,13 @@
 // Limit Switches
 //
 #define X_MIN_PIN                           PC2
-#define X_MAX_PIN                           PA2
+//#define X_MAX_PIN                           PA2
 #define Y_MIN_PIN                           PC1
-#define Y_MAX_PIN                           PA1
+//#define Y_MAX_PIN                           PA1
 #define Z_MIN_PIN                           PC0
-#define Z_MAX_PIN                           PC3
+//#define Z_MAX_PIN                           PC3
 
+#define SERVO0_PIN                          PA1   // SERVOS
 //
 // Steppers
 //

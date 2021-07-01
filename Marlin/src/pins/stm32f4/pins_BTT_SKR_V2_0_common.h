@@ -157,7 +157,7 @@
 // NeoPixel LED
 //
 #ifndef NEOPIXEL_PIN
-  #define NEOPIXEL_PIN                      PE6
+ // #define NEOPIXEL_PIN                      PE6
 #endif
 
 //

@@ -53,7 +53,6 @@
 #define Y_MIN_PIN		PB3
 #define Z_MIN_PIN		PA9
 
-
 //
 // Steppers
 //
@@ -101,13 +100,13 @@
 
 //LCD REPRAP_DISCOUNT_SMART_CONTROLLER
 //
- #define LCD_PINS_RS         PB12
- #define LCD_PINS_ENABLE     PB13
- #define LCD_PINS_D4         PB14
- #define LCD_PINS_D5         PA2
+ //#define LCD_PINS_RS         PB12
+ //#define LCD_PINS_ENABLE     PB13
+ //#define LCD_PINS_D4         PB14
+ //#define LCD_PINS_D5         PA2
  //#define LCD_PINS_D6         PB1//
- //#define LCD_PINS_D7         PB2///<- Ты вонючий алкашь, что блядь это такое, сука, я тебя спрашиваю!
-
+ //#define LCD_PINS_D7         PB2///
+ 
 //MKS_MINI_12864
 //
  //#define DOGLCD_CS         PA3

@@ -397,7 +397,7 @@
 
 // Show Temperature ADC value
 // Enable for M105 to include ADC values read from temperature sensors.
-//#define SHOW_TEMP_ADC_VALUES
+#define SHOW_TEMP_ADC_VALUES
 
 /**
  * High Temperature Thermistor Support
@@ -551,7 +551,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN  PB14
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -756,7 +756,7 @@
 #define HOMING_BUMP_MM      { 5, 5, 2 }       // (mm) Backoff from endstops after first bump
 #define HOMING_BUMP_DIVISOR { 2, 2, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
-//#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (mm) Backoff from endstops after homing
+#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (mm) Backoff from endstops after homing
 
 //#define QUICK_HOME                          // If G28 contains XY do a diagonal move first
 //#define HOME_Y_BEFORE_X                     // If G28 contains XY home Y before X
@@ -974,7 +974,7 @@
  * See https://hydraraptor.blogspot.com/2010/12/frequency-limit.html
  * Use M201 F<freq> G<min%> to change limits at runtime.
  */
-//#define XY_FREQUENCY_LIMIT      10 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
+#define XY_FREQUENCY_LIMIT      15 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
 #ifdef XY_FREQUENCY_LIMIT
   #define XY_FREQUENCY_MIN_PERCENT 5 // (percent) Minimum FR percentage to apply. Set with M201 G<min%>.
 #endif
@@ -1089,7 +1089,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-//#define ADAPTIVE_STEP_SMOOTHING
+#define ADAPTIVE_STEP_SMOOTHING
 
 /**
  * Custom Microstepping
@@ -1205,7 +1205,7 @@
   #endif
 
   // Include a page of printer information in the LCD Main Menu
-  //#define LCD_INFO_MENU
+  #define LCD_INFO_MENU
   #if ENABLED(LCD_INFO_MENU)
     //#define LCD_PRINTER_INFO_IS_BOOTSCREEN // Show bootscreen(s) instead of Printer Info pages
   #endif
@@ -1249,7 +1249,7 @@
 
 #if HAS_DISPLAY
   // The timeout (in ms) to return to the status screen from sub-menus
-  //#define LCD_TIMEOUT_TO_STATUS 15000
+  #define LCD_TIMEOUT_TO_STATUS 15000
 
   #if ENABLED(SHOW_BOOTSCREEN)
     #define BOOTSCREEN_TIMEOUT 4000      // (ms) Total Duration to display the boot screen(s)
@@ -1259,7 +1259,7 @@
   #endif
 
   // Scroll a longer status message into view
-  //#define STATUS_MESSAGE_SCROLLING
+  #define STATUS_MESSAGE_SCROLLING
 
   // On the Info Screen, display XY with one decimal place when possible
   //#define LCD_DECIMAL_SMALL_XY
@@ -1268,7 +1268,7 @@
   //#define LCD_SET_PROGRESS_MANUALLY
 
   // Show the E position (filament used) during printing
-  //#define LCD_SHOW_E_TOTAL
+  #define LCD_SHOW_E_TOTAL
 #endif
 
 #if EITHER(SDSUPPORT, LCD_SET_PROGRESS_MANUALLY) && ANY(HAS_MARLINUI_U8GLIB, HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL, EXTENSIBLE_UI)
@@ -1410,13 +1410,13 @@
 
   // Allow international symbols in long filenames. To display correctly, the
   // LCD's font must contain the characters. Check your selected LCD language.
-  //#define UTF_FILENAME_SUPPORT
+  #define UTF_FILENAME_SUPPORT
 
   // This allows hosts to request long names for files and folders with M33
-  //#define LONG_FILENAME_HOST_SUPPORT
+  #define LONG_FILENAME_HOST_SUPPORT
 
   // Enable this option to scroll long filenames in the SD card menu
-  //#define SCROLL_LONG_FILENAMES
+  #define SCROLL_LONG_FILENAMES
 
   // Leave the heaters on after Stop Print (not recommended!)
   //#define SD_ABORT_NO_COOLDOWN
@@ -1597,15 +1597,15 @@
   #define STATUS_HOTEND_INVERTED      // Show solid nozzle bitmaps when heating (Requires STATUS_HOTEND_ANIM for numbered hotends)
   #define STATUS_HOTEND_ANIM          // Use a second bitmap to indicate hotend heating
   #define STATUS_BED_ANIM             // Use a second bitmap to indicate bed heating
-  #define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
+  //#define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
   //#define STATUS_CUTTER_ANIM        // Use a second bitmap to indicate spindle / laser active
   //#define STATUS_COOLER_ANIM        // Use a second bitmap to indicate laser cooling
   //#define STATUS_FLOWMETER_ANIM     // Use multiple bitmaps to indicate coolant flow
   //#define STATUS_ALT_BED_BITMAP     // Use the alternative bed bitmap
   //#define STATUS_ALT_FAN_BITMAP     // Use the alternative fan bitmap
   //#define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
-  //#define STATUS_HEAT_PERCENT       // Show heating in a progress bar
-  //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~‭3260 (or ~940) bytes of PROGMEM.
+  #define STATUS_HEAT_PERCENT       // Show heating in a progress bar
+  #define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~‭3260 (or ~940) bytes of PROGMEM.
 
   // Frivolous Game Options
   //#define MARLIN_BRICKOUT
@@ -1822,7 +1822,7 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define INTEGRATED_BABYSTEPPING         // EXPERIMENTAL integration of babystepping into the Stepper ISR
   //#define BABYSTEP_WITHOUT_HOMING
@@ -1833,11 +1833,11 @@
   #define BABYSTEP_MULTIPLICATOR_Z  1       // (steps or mm) Steps or millimeter distance for each Z babystep
   #define BABYSTEP_MULTIPLICATOR_XY 1       // (steps or mm) Steps or millimeter distance for each XY babystep
 
-  //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
-    //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
+    #define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
     #if ENABLED(MOVE_Z_WHEN_IDLE)
       #define MOVE_Z_IDLE_MULTIPLICATOR 1   // Multiply 1mm by this factor for the move step size.
     #endif
@@ -1869,12 +1869,12 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
   #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
   //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
-  //#define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
+  #define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
 #endif
 
 // @section leveling
@@ -1920,14 +1920,14 @@
 
 #if EITHER(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL)
   // Override the mesh area if the automatic (max) area is too large
-  //#define MESH_MIN_X MESH_INSET
-  //#define MESH_MIN_Y MESH_INSET
-  //#define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
-  //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
+  #define MESH_MIN_X MESH_INSET
+  #define MESH_MIN_Y MESH_INSET
+  #define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
+  #define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 #endif
 
 #if BOTH(AUTO_BED_LEVELING_UBL, EEPROM_SETTINGS)
-  //#define OPTIMIZED_MESH_STORAGE  // Store mesh with less precision to save EEPROM space
+  #define OPTIMIZED_MESH_STORAGE  // Store mesh with less precision to save EEPROM space
 #endif
 
 /**
@@ -2068,8 +2068,8 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_POST_DIR_DELAY 650
-//#define MINIMUM_STEPPER_PRE_DIR_DELAY 650
+#define MINIMUM_STEPPER_POST_DIR_DELAY 500
+#define MINIMUM_STEPPER_PRE_DIR_DELAY 500
 
 /**
  * Minimum stepper driver pulse width (in µs)
@@ -2082,7 +2082,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_PULSE 2
+#define MINIMUM_STEPPER_PULSE 1
 
 /**
  * Maximum stepping rate (in Hz) the stepper driver allows
@@ -2096,7 +2096,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MAXIMUM_STEPPER_RATE 250000
+#define MAXIMUM_STEPPER_RATE 1000000
 
 // @section temperature
 
@@ -2196,10 +2196,10 @@
 // Therefore some clients abort after 30 seconds in a timeout.
 // Some other clients start sending commands while receiving a 'wait'.
 // This "wait" is only sent when the buffer is empty. 1 second is a good value here.
-//#define NO_TIMEOUTS 1000 // Milliseconds
+#define NO_TIMEOUTS 5000 // Milliseconds
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-//#define ADVANCED_OK
+#define ADVANCED_OK
 
 // Printrun may have trouble receiving long strings all at once.
 // This option inserts short delays between lines of serial output.
@@ -2233,9 +2233,9 @@
  *
  * Note that M207 / M208 / M209 settings are saved to EEPROM.
  */
-//#define FWRETRACT
+#define FWRETRACT
 #if ENABLED(FWRETRACT)
-  #define FWRETRACT_AUTORETRACT             // Override slicer retractions
+  //#define FWRETRACT_AUTORETRACT             // Override slicer retractions
   #if ENABLED(FWRETRACT_AUTORETRACT)
     #define MIN_AUTORETRACT             0.1 // (mm) Don't convert E moves under this length
     #define MAX_AUTORETRACT            10.0 // (mm) Don't convert E moves over this length
@@ -3612,7 +3612,7 @@
 //#define M114_REALTIME       // Real current position based on forward kinematics
 //#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
 
-//#define REPORT_FAN_CHANGE   // Report the new fan speed when changed by M106 (and others)
+#define REPORT_FAN_CHANGE   // Report the new fan speed when changed by M106 (and others)
 
 /**
  * Set the number of proportional font spaces required to fill up a typical character space.

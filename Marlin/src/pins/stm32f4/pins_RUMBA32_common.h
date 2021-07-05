@@ -63,15 +63,15 @@
 
 #define Y_STEP_PIN         PB5
 #define Y_DIR_PIN          PB4
-#define Y_ENABLE_PIN       PB8
+#define Y_ENABLE_PIN       X_ENABLE_PIN
 
 #define Z_STEP_PIN         PA15
 #define Z_DIR_PIN          PA10
-#define Z_ENABLE_PIN       PB8
+#define Z_ENABLE_PIN       X_ENABLE_PIN
 
 #define E0_STEP_PIN        PA8
 #define E0_DIR_PIN         PB15
-#define E0_ENABLE_PIN      PB8
+#define E0_ENABLE_PIN      X_ENABLE_PIN
 
 //
 // Temperature Sensors
@@ -98,29 +98,17 @@
 #define SD_DETECT_PIN     -1
 #define KILL_PIN          -1
 
+#define SERVO0_PIN         PA2
+
+
 //LCD REPRAP_DISCOUNT_SMART_CONTROLLER
 //
  //#define LCD_PINS_RS         PB12
  //#define LCD_PINS_ENABLE     PB13
  //#define LCD_PINS_D4         PB14
- //#define LCD_PINS_D5         PA2
- //#define LCD_PINS_D6         PB1//
- //#define LCD_PINS_D7         PB2///
- 
-//MKS_MINI_12864
-//
- //#define DOGLCD_CS         PA3
- //#define DOGLCD_A0         PB10
-
- // GLCD features
- //
- //#define LCD_CONTRAST   190
-
- // Uncomment screen orientation
- //
- //#define LCD_SCREEN_ROT_90
- //#define LCD_SCREEN_ROT_180
- //#define LCD_SCREEN_ROT_270
+ //#define LCD_PINS_D5         PA2-----
+ //#define LCD_PINS_D6         PB1-----
+ //#define LCD_PINS_D7         PB2-----
 
 //#define DISABLE_JTAG
 #define FAN_SOFT_PWM

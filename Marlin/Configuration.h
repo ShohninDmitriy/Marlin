@@ -468,7 +468,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -542,7 +542,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      130
+#define BED_MAXTEMP      230
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -728,7 +728,7 @@
 
 // Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
-//#define COREXY
+#define COREXY
 //#define COREXZ
 //#define COREYZ
 //#define COREYX
@@ -829,9 +829,9 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  A4988
-#define Y_DRIVER_TYPE  A4988
-#define Z_DRIVER_TYPE  A4988
+#define X_DRIVER_TYPE  TMC2209_STANDALONE
+#define Y_DRIVER_TYPE  TMC2209_STANDALONE
+#define Z_DRIVER_TYPE  TMC2208_STANDALONE
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
@@ -840,7 +840,7 @@
 //#define I_DRIVER_TYPE  A4988
 //#define J_DRIVER_TYPE  A4988
 //#define K_DRIVER_TYPE  A4988
-#define E0_DRIVER_TYPE A4988
+#define E0_DRIVER_TYPE LV8729
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -865,7 +865,7 @@
  *
  * :[2,3,4,5,6,7]
  */
-//#define ENDSTOP_NOISE_THRESHOLD 2
+#define ENDSTOP_NOISE_THRESHOLD 2
 
 // Check for stuck or disconnected endstops during homing moves.
 //#define DETECT_BROKEN_ENDSTOP
@@ -982,7 +982,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1049,8 +1049,8 @@
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
  */
-//#define Z_PROBE_SERVO_NR 0       // Defaults to SERVO 0 connector.
-//#define Z_SERVO_ANGLES { 70, 0 } // Z Servo Deploy and Stow angles
+#define Z_PROBE_SERVO_NR 0       // Defaults to SERVO 0 connector.
+#define Z_SERVO_ANGLES { 70, 0 } // Z Servo Deploy and Stow angles
 
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
@@ -1198,7 +1198,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 2
 //#define EXTRA_PROBING    1
 
 /**
@@ -1218,7 +1218,7 @@
 #define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
-//#define Z_AFTER_PROBING           5 // Z position after probing is done
+#define Z_AFTER_PROBING           5 // Z position after probing is done
 
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
 
@@ -1227,7 +1227,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#define Z_MIN_PROBE_REPEATABILITY_TEST
 
 // Before deploy/stow pause for user confirmation
 //#define PAUSE_BEFORE_DEPLOY_STOW
@@ -1505,7 +1505,7 @@
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_BILINEAR
-//#define AUTO_BED_LEVELING_UBL
+#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
 /**
@@ -1530,7 +1530,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
   // Set a height for the start of manual adjustment
@@ -1541,7 +1541,7 @@
   // Gradually reduce leveling correction until a set height is reached,
   // at which point movement will be level to the machine's XY plane.
   // The height can be set with M420 Z<height>
-  #define ENABLE_LEVELING_FADE_HEIGHT
+  //#define ENABLE_LEVELING_FADE_HEIGHT
   #if ENABLED(ENABLE_LEVELING_FADE_HEIGHT)
     #define DEFAULT_LEVELING_FADE_HEIGHT 10.0 // (mm) Default fade height.
   #endif
@@ -1603,8 +1603,8 @@
 
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
+  #define MESH_INSET 10              // Set Mesh bounds as an inset region of the bed
+  #define GRID_MAX_POINTS_X 15      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
@@ -1638,9 +1638,9 @@
 //#define LCD_BED_LEVELING
 
 #if ENABLED(LCD_BED_LEVELING)
-  #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
+  #define MESH_EDIT_Z_STEP  0.005 // (mm) Step size while manually probing Z axis.
   #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
-  //#define MESH_EDIT_MENU        // Add a menu to edit mesh points
+  #define MESH_EDIT_MENU        // Add a menu to edit mesh points
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
@@ -1707,7 +1707,7 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-//#define Z_SAFE_HOMING
+#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
@@ -2026,7 +2026,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)' }
  */
-#define LCD_LANGUAGE en
+#define LCD_LANGUAGE ru
 
 /**
  * LCD Character Set
@@ -2050,7 +2050,7 @@
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
-#define DISPLAY_CHARSET_HD44780 JAPANESE
+#define DISPLAY_CHARSET_HD44780 CYRILLIC
 
 /**
  * Info Screen Style (0:Classic, 1:Průša)
@@ -2112,7 +2112,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-//#define REVERSE_ENCODER_DIRECTION
+#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -2461,8 +2461,14 @@
 #if ENABLED(SAV_3DGLCD)
   #define U8GLIB_SSD1306
   //#define U8GLIB_SH1106
+  #define ALTERNATIVE_LCD
 #endif
-
+//#define U8GLIB_SH1106
+//#define U8GLIB_SSD1306
+//#define ALTERNATIVE_LCD
+//#define IS_ULTIPANEL 1
+//#define STD_ENCODER_PULSES_PER_STEP 4
+//#define STD_ENCODER_STEPS_PER_MENU_ITEM 1
 //
 // TinyBoy2 128x64 OLED / Encoder Panel
 //
@@ -2475,6 +2481,7 @@
 // Tiny, but very sharp OLED display
 //
 //#define MKS_12864OLED          // Uses the SH1106 controller (default)
+
 //#define MKS_12864OLED_SSD1306  // Uses the SSD1306 controller
 
 //
@@ -2872,4 +2879,4 @@
 //#define DEACTIVATE_SERVOS_AFTER_MOVE
 
 // Edit servo angles with M281 and save to EEPROM with M500
-//#define EDITABLE_SERVO_ANGLES
+#define EDITABLE_SERVO_ANGLES

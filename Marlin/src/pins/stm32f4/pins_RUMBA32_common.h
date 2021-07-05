@@ -94,18 +94,27 @@
 #define BTN_ENC           PC13
 
 // SDCard
-#define SDSS               PA4
-#define SD_DETECT_PIN     -1
+#define SDSS              PA4
+#define SD_DETECT_PIN     PB13
 #define KILL_PIN          -1
 
 #define SERVO0_PIN         PA2
 
+#ifndef NEOPIXEL_PIN
+  #define NEOPIXEL_PIN     PB12  
+#endif
+
+#ifndef E0_AUTO_FAN_PIN
+ #define E0_AUTO_FAN_PIN   PB14
+#endif
+
+#define HAS_OTG_USB_HOST_SUPPORT
 
 //LCD REPRAP_DISCOUNT_SMART_CONTROLLER
 //
- //#define LCD_PINS_RS         PB12
- //#define LCD_PINS_ENABLE     PB13
- //#define LCD_PINS_D4         PB14
+ //#define LCD_PINS_RS         PB12----
+ //#define LCD_PINS_ENABLE     PB13----
+ //#define LCD_PINS_D4         PB14----
  //#define LCD_PINS_D5         PA2-----
  //#define LCD_PINS_D6         PB1-----
  //#define LCD_PINS_D7         PB2-----

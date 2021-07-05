@@ -1220,7 +1220,7 @@
    * LED Control Menu
    * Add LED Control to the LCD menu
    */
-  //#define LED_CONTROL_MENU
+  #define LED_CONTROL_MENU
   #if ENABLED(LED_CONTROL_MENU)
     #define LED_COLOR_PRESETS                 // Enable the Preset Color menu option
     //#define NEO2_COLOR_PRESETS              // Enable a second NeoPixel Preset Color menu option
@@ -1467,7 +1467,7 @@
      *   [1] This requires USB_INTR_PIN to be interrupt-capable.
      */
     //#define USE_UHS2_USB
-    //#define USE_UHS3_USB
+    #define USE_UHS3_USB
 
     /**
      * Native USB Host supported by some boards (USB OTG)

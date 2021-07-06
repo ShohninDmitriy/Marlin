@@ -1337,8 +1337,8 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 200
-#define Y_BED_SIZE 200
+#define X_BED_SIZE 400
+#define Y_BED_SIZE 400
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1346,7 +1346,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+#define Z_MAX_POS 400
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1402,7 +1402,7 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-//#define FILAMENT_RUNOUT_SENSOR
+#define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
@@ -1848,7 +1848,7 @@
  *    P1  Raise the nozzle always to Z-park height.
  *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
  */
-//#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
@@ -2461,18 +2461,16 @@
 #if ENABLED(SAV_3DGLCD)
   #define U8GLIB_SSD1306
   //#define U8GLIB_SH1106
-  #define ALTERNATIVE_LCD
 #endif
 //#define U8GLIB_SH1106
-//#define U8GLIB_SSD1306
-//#define ALTERNATIVE_LCD
-//#define IS_ULTIPANEL 1
-//#define STD_ENCODER_PULSES_PER_STEP 4
-//#define STD_ENCODER_STEPS_PER_MENU_ITEM 1
+#define U8GLIB_SSD1306
+#define IS_ULTIPANEL 1
+#define STD_ENCODER_PULSES_PER_STEP 4
+#define STD_ENCODER_STEPS_PER_MENU_ITEM 1
 //
 // TinyBoy2 128x64 OLED / Encoder Panel
 //
-#define OLED_PANEL_TINYBOY2
+//#define OLED_PANEL_TINYBOY2
 
 //
 // MKS OLED 1.3" 128×64 Full Graphics Controller

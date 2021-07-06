@@ -38,55 +38,49 @@
 */
 #if NOT_TARGET(STM32F4)
   #error "Oops! Select an STM32F4 board in 'Tools > Board.'"
-#elif HOTENDS > 3 || E_STEPPERS > 3
-  #error "RUMBA32 boards support up to 3 hotends / E-steppers."
+#elif HOTENDS > 1 || E_STEPPERS > 1
+  #error "RUMBA32 boards support up to 1 hotends / E-steppers."
 #endif
 
 #define DEFAULT_MACHINE_NAME BOARD_INFO_NAME
-//
 // Limit Switches
-//
-//#define X_MAX_PIN          PB9
-//#define Y_MAX_PIN          PB3
-//#define Z_MAX_PIN          PA9
-#define X_MIN_PIN		PB9
-#define Y_MIN_PIN		PB3
-#define Z_MIN_PIN		PA9
+#define X_MIN_PIN		      PB9
+#define Y_MIN_PIN		      PB3
+#define Z_MIN_PIN		      PA9
 
-//
+#if ENABLED(FILAMENT_RUNOUT_SENSOR)
+ #define FIL_RUNOUT_PIN   PB13
+#endif
+
 // Steppers
-//
 // X & Y enable are the same
-#define X_STEP_PIN         PB1
-#define X_DIR_PIN          PB2
-#define X_ENABLE_PIN       PB8
+#define X_STEP_PIN        PB1
+#define X_DIR_PIN         PB2
+#define X_ENABLE_PIN      PB8
 
-#define Y_STEP_PIN         PB5
-#define Y_DIR_PIN          PB4
-#define Y_ENABLE_PIN       X_ENABLE_PIN
+#define Y_STEP_PIN        PB5
+#define Y_DIR_PIN         PB4
+#define Y_ENABLE_PIN      X_ENABLE_PIN
 
-#define Z_STEP_PIN         PA15
-#define Z_DIR_PIN          PA10
-#define Z_ENABLE_PIN       X_ENABLE_PIN
+#define Z_STEP_PIN        PA15
+#define Z_DIR_PIN         PA10
+#define Z_ENABLE_PIN      X_ENABLE_PIN
 
-#define E0_STEP_PIN        PA8
-#define E0_DIR_PIN         PB15
-#define E0_ENABLE_PIN      X_ENABLE_PIN
+#define E0_STEP_PIN       PA8
+#define E0_DIR_PIN        PB15
+#define E0_ENABLE_PIN     X_ENABLE_PIN
 
-//
 // Temperature Sensors
-//
-#define TEMP_0_PIN         PB0   // Analog Input (HOTEND thermistor)
-#define TEMP_BED_PIN       PA3  // Analog Input (BED thermistor)
+#define TEMP_0_PIN        PB0   // Analog Input (HOTEND thermistor)
+#define TEMP_BED_PIN      PA3  // Analog Input (BED thermistor)
 
-//
 // Heaters / Fans
-//
-#define HEATER_0_PIN       PA1   // HOTEND MOSFET
-#define HEATER_BED_PIN     PB10  // BED MOSFET
+#define HEATER_0_PIN      PA1   // HOTEND MOSFET
+#define HEATER_BED_PIN    PB10  // BED MOSFET
+#define FAN_PIN           PA0   // FAN1 header on board - PRINT FAN
 
-#define FAN_PIN            PA0   // FAN1 header on board - PRINT FAN
-
+// Servo
+#define SERVO0_PIN        PA2
 
 //Encoder
 #define BTN_EN1           PC15
@@ -95,29 +89,20 @@
 
 // SDCard
 #define SDSS              PA4
-#define SD_DETECT_PIN     PB13
+#define SD_DETECT_PIN     -1
 #define KILL_PIN          -1
 
-#define SERVO0_PIN         PA2
-
-#ifndef NEOPIXEL_PIN
-  #define NEOPIXEL_PIN     PB12  
+#if ENABLED(NEOPIXEL_LED)
+ #ifndef NEOPIXEL_PIN
+   #define NEOPIXEL_PIN   PB12  
+ #endif
 #endif
 
-#ifndef E0_AUTO_FAN_PIN
- #define E0_AUTO_FAN_PIN   PB14
-#endif
+//#define E0_AUTO_FAN_PIN   PB14
 
-#define HAS_OTG_USB_HOST_SUPPORT
+// I2C    SDA PB7  SCL PB6
 
-//LCD REPRAP_DISCOUNT_SMART_CONTROLLER
-//
- //#define LCD_PINS_RS         PB12----
- //#define LCD_PINS_ENABLE     PB13----
- //#define LCD_PINS_D4         PB14----
- //#define LCD_PINS_D5         PA2-----
- //#define LCD_PINS_D6         PB1-----
- //#define LCD_PINS_D7         PB2-----
+//#define HAS_OTG_USB_HOST_SUPPORT
 
 //#define DISABLE_JTAG
 #define FAN_SOFT_PWM

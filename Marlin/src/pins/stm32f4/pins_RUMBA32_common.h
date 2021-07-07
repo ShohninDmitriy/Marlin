@@ -98,6 +98,11 @@
  #endif
 #endif
 
+#ifndef PS_ON_PIN
+  #define PS_ON_PIN       PB12   // PS-ON
+#endif
+
+
 //#define E0_AUTO_FAN_PIN   PB14
 
 // I2C    SDA PB7  SCL PB6
@@ -105,4 +110,4 @@
 //#define HAS_OTG_USB_HOST_SUPPORT
 
 //#define DISABLE_JTAG
-#define FAN_SOFT_PWM
+//#define FAN_SOFT_PWM

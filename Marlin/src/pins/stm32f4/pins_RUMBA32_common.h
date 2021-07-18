@@ -92,15 +92,15 @@
 #define SD_DETECT_PIN     -1
 #define KILL_PIN          -1
 
-#if ENABLED(NEOPIXEL_LED)
- #ifndef NEOPIXEL_PIN
-   #define NEOPIXEL_PIN   PB12  
- #endif
-#endif
+//#if ENABLED(NEOPIXEL_LED)
+// #ifndef NEOPIXEL_PIN
+//   #define NEOPIXEL_PIN   PB12  
+// #endif
+//#endif
 
-#ifndef PS_ON_PIN
-  #define PS_ON_PIN       PB12   // PS-ON
-#endif
+//#ifndef PS_ON_PIN
+//  #define PS_ON_PIN       PB12   // PS-ON
+//#endif
 
 
 //#define E0_AUTO_FAN_PIN   PB14
@@ -110,4 +110,4 @@
 //#define HAS_OTG_USB_HOST_SUPPORT
 
 //#define DISABLE_JTAG
-//#define FAN_SOFT_PWM
+#define FAN_SOFT_PWM
